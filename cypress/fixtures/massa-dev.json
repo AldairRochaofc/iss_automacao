@@ -1,0 +1,24 @@
+{
+  "casasbahia": {
+    "idPedidoVia": 363315915,
+    "idPedidoVia1": 364416273,
+    "idPedidoVia2": 363718750,
+    "idPedidoVia3": 363649265,
+    "idPedidoParceiro": 3913,
+    "CPF": "675.545.337-46",
+    "CNPJ": "33.272.091/0001-73",
+    "codigoBandeira": "11"
+  },
+  "pontofrio":
+  {
+    "idPedidoVia": 111111,
+    "idPedidoParceiro": 2222,
+    "cpfCnpj": "111.545.337-46"
+  },
+  "extra":
+  {
+    "idPedidoVia": 222222,
+    "idPedidoParceiro": 2222,
+    "cpfCnpj": "222.545.337-46"
+  }
+}
