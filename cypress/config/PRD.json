@@ -1,0 +1,8 @@
+{
+    "baseUrlBff": "https://bff-portalparceiros-b2b.via.com.br",
+    "urlPortal": "https://portalparceiro.via.com.br/pt-BR/",
+    "urlOrigin": "https://vvb2bprd.b2clogin.com",
+    "atendimento": "",
+    "integracao": "/",
+    "allure": "true"
+}

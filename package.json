@@ -1,0 +1,46 @@
+{
+  "name": "experienciadoparceiro",
+  "version": "0.0.4",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "publishConfig": {
+    "registry": "http://nexus.viavarejo.com.br/repository/npm-private"
+  },
+  "scripts": {
+    "cy:test": "cypress run --config video=false --env",
+    "cy:open": "cypress open",
+    "cy:ci": "npx cypress run --record --parallel --group ${{env.DEFAULT_GROUP}} --key ${{env.DEFAULT_KEY}} --browser ${{github.event.inputs.browser || env.DEFAULT_BROWSER}} --env version=${{github.event.inputs.amb || env.DEFAULT_AMB}} grepTags=${{github.event.inputs.tag || env.DEFAULT_TAG}}",
+    "cy:dash": "npx cypress run --record --key {secrets_dash}",
+    "allure:report": "allure generate --clean allure-results && allure open"
+  },
+  "keywords": [
+    "cypress",
+    "tests",
+    "mocha",
+    "github-actions"
+  ],
+  "devDependencies": {
+    "cypress-grep": "2.13.1",
+    "cypress-localstorage-commands": "^2.2.3",
+    "cypress-xpath": "1.6.2",
+    "eslint": "^8.40.0",
+    "eslint-plugin-cypress": "^2.12.1"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "^2.33.0",
+    "@babel/eslint-parser": "^7.21.8",
+    "@shelex/cypress-allure-plugin": "2.23.0",
+    "allure-commandline": "^2.18.1",
+    "browser": "^0.2.6",
+    "cypress": "^12.13.0",
+    "cypress-plugin-api": "^1.8.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "faker-br": "^0.4.1",
+    "fs": "^0.0.1-security",
+    "joi": "^17.6.1",
+    "parse-request": "^6.0.0",
+    "puppeteer": "^19.5.0"
+  }
+}

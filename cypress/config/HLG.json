@@ -1,0 +1,8 @@
+{
+    "baseUrlBff": "https://bff-portalparceiros-b2b.via.com.br",
+    "urlPortal": "https://app-portalparceiro-b2b-hlg.via.com.br/pt-BR/",
+    "urlOrigin": "https://vvb2bhlg.b2clogin.com",
+    "atendimento": "https://api-az-hlg.viavarejo.com.br/",
+    "integracao": "http://api-integracao-casasbahia.dev-bope-b2b.net/",
+    "allure": "true"
+}

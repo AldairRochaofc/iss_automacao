@@ -1,0 +1,68 @@
+name: Continuos Testing
+on:
+  push:
+    branches: [ master, release/develop, understant-and-reading-the-projecte2e ]
+
+  # schedule: deve utilizar quando for necessário agendamendo para execução
+      # run at *minute  *hours *month *months of the years *days of week
+    # - cron: "* * * * *"
+
+  workflow_dispatch:
+    inputs:
+      amb:
+        description: 'Selecionar algum destes ambientes: dev / stg / hlg / prd'
+        required: false
+        default: 'dev'
+      browser:
+        description: 'Selecionar algum destes browsers: chrome / electron'
+        required: true
+        default: 'chrome'
+      tag:
+        description: 'Selecionar alguma tag, por exemplo: @regressivo / @smoke / @demo'
+        required: false
+        default: '@demo'
+
+env:
+  DEFAULT_KEY: "09b23982-a7b9-4bb2-8a48-72aaa7a25dde"
+  DEFAULT_AMB: "dev"
+  DEFAULT_BROWSER: "chrome"
+  DEFAULT_TAG: "@demo"
+  DEFAULT_GROUP: "CI"
+
+jobs:
+  cypress-run-tests:
+    name: Cypress run
+    runs-on: self-hosted
+    container: cypress/browsers:node14.15.0-chrome96-ff94
+    strategy:
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Add Hosts
+        run: cat "${GITHUB_WORKSPACE}/ci/hosts.txt" >> /etc/hosts
+
+      - name: Cypress run tests
+        uses: cypress-io/github-action@v4
+        with:
+          command: npx cypress run
+
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 20
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
